@@ -1,0 +1,51 @@
+
+.ui.borderless.stackable.menu{
+    border:none;
+    .item{
+        font-size: 16px;
+    }
+    .header.item{
+        font-size:19px; 
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        letter-spacing: 4px;
+        justify-content: space-between;
+        transition: all .5s ease-out;
+
+        @media (min-width: 768px){
+            font-size:26px; 
+        }
+        @media (min-width: 1000px){
+            font-size:30px; 
+        }
+        .bars.icon{
+            &:hover{
+                cursor: pointer;
+            }
+            @media (min-width: 768px){
+                display: none;
+            }
+        }
+    }
+    .ui.icon.input{
+        @media (min-width: 768px){
+            width:160px;
+        }
+        @media (min-width: 1000px){
+            width:260px; 
+        }
+    }
+    .right.menu{
+
+        max-height: 200px;
+        overflow: hidden;
+        transition: all .5s ease-out;
+        
+        &.collapsed{
+            max-height: 0;
+        }
+        @media (min-width: 768px){
+            overflow: unset;
+        }
+    }
+}
