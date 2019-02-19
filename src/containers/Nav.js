@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Nav.scss';
-import { Menu, Input, Icon, Container, Dropdown } from 'semantic-ui-react'
+import { Menu, Input, Icon, Container, Dropdown, Button } from 'semantic-ui-react';
 
 class Nav extends Component {
     state = {
@@ -43,8 +43,16 @@ class Nav extends Component {
                         Type
                         </Menu.Item>
 
-                        <Dropdown item text='Chart (0)'>
+                        <Dropdown item button className='icon' icon='shop' text='(0)'>
                             <Dropdown.Menu>
+                         
+                                <Button animated fluid size='small'>
+                                    <Button.Content visible>Go to</Button.Content>
+                                    <Button.Content hidden>
+                                        <Icon name='arrow right' />
+                                    </Button.Content>
+                                </Button>
+                             
                                 <Dropdown.Item>No items in chart</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

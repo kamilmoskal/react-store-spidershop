@@ -1,0 +1,12 @@
+.ui.card{
+    .img-container{
+        overflow: hidden;
+        .ui.image{
+            transition: all .5s ease-out;
+            &:hover{
+                transform: scale(1.2) rotate(10deg);
+        
+            }
+        }
+    }
+}
