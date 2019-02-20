@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import './Header.scss';
 import { Spring } from 'react-spring/renderprops';
 import * as d3 from "d3-ease";
@@ -21,4 +21,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header */

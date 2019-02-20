@@ -6,6 +6,9 @@ import { Transition } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
 
 class ProductsList extends Component {
+  addToChartList = (id) => {
+    this.props.addToChart(id);
+  }
   render() {
     const { productsList } = this.props;
     return (
@@ -17,7 +20,7 @@ class ProductsList extends Component {
           from={{ opacity: 0 }}
           enter={{ opacity: 1 }}
           leave={{ opacity: 0 }}>
-              {item => props => <ProductCard transition={props} product={item}/>}
+              {item => props => <ProductCard transition={props} product={item} addToChartList={this.addToChartList}/>}
         </Transition>
   
       </Card.Group>
@@ -30,6 +33,11 @@ const mapStateToProps = (state) => {
     productsList: state.productsList
   }
 }
-export default connect(mapStateToProps)(ProductsList);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    addToChart: (id) => { dispatch({type: 'ADD_TO_CHART', id }) }
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ProductsList);
 
  

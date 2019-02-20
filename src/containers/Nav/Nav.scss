@@ -38,14 +38,20 @@
     .right.menu{
 
         max-height: 200px;
-        overflow: hidden;
         transition: all .5s ease-out;
         
         &.collapsed{
             max-height: 0;
+            overflow: hidden;
         }
         @media (min-width: 768px){
             overflow: unset;
+        }
+
+        .menu.transition{
+            .item{
+                min-width: 260px;
+            }
         }
     }
 }

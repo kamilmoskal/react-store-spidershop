@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Nav.scss';
 import { Menu, Input, Icon, Container, Dropdown, Button } from 'semantic-ui-react';
+import ChartItem from '../../components/ChartItem/ChartItem';
+import { connect } from 'react-redux';
 
 class Nav extends Component {
     state = {
@@ -17,10 +19,14 @@ class Nav extends Component {
     }
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
     onBurgerClick = () => this.setState({ activeBurger: !this.state.activeBurger })
+    removeFromChartList = (id) => {
+        this.props.removeFromChart(id);
+    }
     render() {
-        const { activeItem } = this.state
-        let menuCollapsed = this.state.activeBurger ? '' : 'collapsed';
-       
+    const { activeItem } = this.state;
+    const { chartList } = this.props;
+    let menuCollapsed = this.state.activeBurger ? '' : 'collapsed';
+    let total = 0;
         return (
             <Menu stackable borderless>
                 <Container>
@@ -43,28 +49,42 @@ class Nav extends Component {
                         Type
                         </Menu.Item>
 
-                        <Dropdown item button className='icon' icon='shop' text='(0)'>
+                        <Dropdown item simple button className='icon' icon='shop' text={`(${chartList.length})`}>
                             <Dropdown.Menu>
                          
+                                {chartList.length ? chartList.map(item => {
+                                    total += item.price * item.amount;
+                                    return(
+                                        <Dropdown.Item key={item.id}><ChartItem product={item} removeFromChartList={this.removeFromChartList}/></Dropdown.Item>
+                                    )
+                                }) : <Dropdown.Item>No items in chart</Dropdown.Item>}
+
+                                {chartList.length ? <Dropdown.Item active>Total: ${total} </Dropdown.Item> : null}
+
                                 <Button animated fluid size='small'>
-                                    <Button.Content visible>Go to</Button.Content>
+                                    <Button.Content visible>View Chart</Button.Content>
                                     <Button.Content hidden>
                                         <Icon name='arrow right' />
                                     </Button.Content>
                                 </Button>
-                             
-                                <Dropdown.Item>No items in chart</Dropdown.Item>
+
                             </Dropdown.Menu>
                         </Dropdown>
-
-                        {/* <Menu.Item name='chart' active={activeItem === 'chart'} onClick={this.handleItemClick}>
-                        Chart (0)
-                        </Menu.Item> */}
                     </Menu.Menu>
                 </Container>
             </Menu>
         )
     }
-    }
+}
 
-export default Nav;
+const mapStateToProps = (state) => {
+    return{
+        chartList: state.chartList
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        removeFromChart: (id) => { dispatch({ type: 'REMOVE_FROM_CHART', id }) }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Nav);

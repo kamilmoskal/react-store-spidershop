@@ -19,7 +19,7 @@ class Filters extends Component {
   render() {
     return (
       <div>
-        <Dropdown placeholder='Species'  clearable search selection options={species} />
+        <Dropdown placeholder='Species'  clearable selection options={species} />
         <Dropdown placeholder='Filter' clearable selection options={options} />
 
         <Divider />
