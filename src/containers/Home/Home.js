@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './Filter.scss';
+import './Home.scss';
 
-class Filter extends Component {
+class Home extends Component {
   render() {
     return (
       <div>
-            sdf
+          sdf
       </div>
     )
   }
 }
 
-export default Filter;
+export default Home

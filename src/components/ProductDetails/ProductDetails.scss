@@ -1,0 +1,14 @@
+.ui.container{
+    .ui.card.product-details{
+        width: 100%;
+        display: grid;
+        padding:10px;
+        box-sizing: border-box;
+        grid-template-columns: 30% 70%;
+       .img-container{
+            img:not(:first-child){
+                margin-top:10px;
+            }   
+       }
+    }
+}
