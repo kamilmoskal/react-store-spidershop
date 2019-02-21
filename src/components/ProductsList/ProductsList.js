@@ -4,6 +4,7 @@ import ProductCard from './ProductCard/ProductCard';
 import { Card } from 'semantic-ui-react';
 import { Transition } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
+import { filterProductList } from '../../selectors/filterData';
 
 class ProductsList extends Component {
   addToChartList = (id) => {
@@ -30,7 +31,7 @@ class ProductsList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    productsList: state.productsList
+    productsList: filterProductList(state)
   }
 }
 const mapDispatchToProps = (dispatch) => {

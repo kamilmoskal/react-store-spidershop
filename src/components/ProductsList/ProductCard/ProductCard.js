@@ -22,14 +22,14 @@ const ProductCard = (props) => {
             </Modal>
 
             <Card.Content>
-                <Card.Header>Brachypelma Boehmei</Card.Header>
+                <Card.Header>{product.species} {product.name}</Card.Header>
                 <Card.Meta>
-                    <span className='date'>available amount: 87</span>
+                    <span className='date'>available amount: {product.stock}</span>
                 </Card.Meta>
                 <Card.Description>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, reprehenderit!</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Card.Header>$15
+                <Card.Header>${product.price}
                     <Button animated='vertical' floated='right' onClick={() => {props.addToChartList(product.id)}}>
                         <Button.Content hidden>Add</Button.Content>
                         <Button.Content visible>
@@ -37,7 +37,7 @@ const ProductCard = (props) => {
                         </Button.Content>
                     </Button>
                 </Card.Header>
-                <Card.Meta>stadium: L1/L2</Card.Meta>   
+                <Card.Meta>stadium: {product.stadium}</Card.Meta>   
             </Card.Content>
         </Card>
         
