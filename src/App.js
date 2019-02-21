@@ -14,9 +14,7 @@ class App extends Component {
           <Nav/>
           <Switch>
             <Route exact path="/" component={Products}/>
-            <Route path="/products/" component={Products}/>
             <Route path="/chart/" component={Chart}/>
-            <Route path="/product/:id" component={Product}/>
           </Switch>
         </div>
       </Router>

@@ -3,6 +3,7 @@ import './Nav.scss';
 import { Menu, Input, Icon, Container, Dropdown, Button } from 'semantic-ui-react';
 import ChartItem from '../../components/ChartItem/ChartItem';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
     state = {
@@ -30,7 +31,7 @@ class Nav extends Component {
         return (
             <Menu stackable borderless>
                 <Container>
-                    <Menu.Item header>
+                    <Menu.Item header as={Link} to='/'>
                         <Icon name='bars' size="large" className='burger' onClick={this.onBurgerClick}/>
                         <span>I<Icon name='heart' />SPIDERS</span>
                         <Icon name='bars' size="large" style={{color: 'transparent'}}/>
@@ -61,7 +62,7 @@ class Nav extends Component {
 
                                 {chartList.length ? <Dropdown.Item active>Total: ${total} </Dropdown.Item> : null}
 
-                                <Button animated fluid size='small'>
+                                <Button animated fluid size='small' as={Link} to='/chart'>
                                     <Button.Content visible>View Chart</Button.Content>
                                     <Button.Content hidden>
                                         <Icon name='arrow right' />

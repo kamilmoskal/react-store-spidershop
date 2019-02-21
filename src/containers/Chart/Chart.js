@@ -5,7 +5,7 @@ class Chart extends Component {
   render() {
     return (
       <div>
-        
+          sdf
       </div>
     )
   }

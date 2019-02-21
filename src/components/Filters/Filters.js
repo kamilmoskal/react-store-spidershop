@@ -36,10 +36,9 @@ class Filters extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="filters">
         <Dropdown placeholder='Species' clearable selection options={species} onChange={this.changeFilterSpecies}/>
         <Dropdown placeholder='Filter' clearable selection options={options} onChange={this.changeFilterOverall}/>
-
         <Divider />
       </div>
     )
