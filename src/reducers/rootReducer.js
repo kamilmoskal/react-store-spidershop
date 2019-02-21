@@ -20,7 +20,7 @@ const initState = {
     chartList: [
         {id: 1, species: 'Brachypelma', name: 'Boehmei', stock: 87, price: 15, stadium: 'L1/L2', img: 'b_boehmei', amount: 1}
     ],
-    filterState: ''
+    filterSpecies: '', filterOverall: ''
 }
 const rootReducer = (state = initState, action) => {
     
@@ -43,10 +43,15 @@ const rootReducer = (state = initState, action) => {
             ...state,
             chartList: state.chartList.filter(e => e.id !== action.id)
         }
-    } else if (action.type === 'CHANGE_FILTER_STATUS'){
+    } else if (action.type === 'FILTER_SPECIES'){
         return { 
             ...state,
-            filterState: action.status
+            filterSpecies: action.species
+        }
+    } else if (action.type === 'FILTER_OVERALL'){
+        return { 
+            ...state,
+            filterOverall: action.overall
         }
     } else {
         return state

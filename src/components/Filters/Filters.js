@@ -14,27 +14,31 @@ const species = [
     { key: 8, text: 'Grammostola', value: 'Grammostola' },
 ]
 const options = [
-    { key: 1, text: 'Price: from the lowest', value: 1 },
-    { key: 2, text: 'Price: from the highest', value: 2 },
-    { key: 3, text: 'Name: from A to Z', value: 3 },
-    { key: 4, text: 'Name: from Z to A', value: 4 },
+    { key: 1, text: 'Price: from the lowest', value: 'Price-L' },
+    { key: 2, text: 'Price: from the highest', value: 'Price-H' },
+    { key: 3, text: 'Name: from A to Z', value: 'Name-A' },
+    { key: 4, text: 'Name: from Z to A', value: 'Name-Z' },
 ]
 
 class Filters extends Component {
   state = { 
-    filterStatus: '' 
+    filterSpecies: '', filterOverall: ''
   }
-  handleChange = (e, { value }) => {
-    this.setState({ filterStatus: value }, () => {
-      this.props.changefilterStatus(this.state.filterStatus)
+  changeFilterSpecies = (e, { value }) => {
+    this.setState({ filterSpecies: value }, () => {
+      this.props.filterSpecies(this.state.filterSpecies)
+    })
+  }
+  changeFilterOverall = (e, { value }) => {
+    this.setState({ filterOverall: value }, () => {
+      this.props.filterOverall(this.state.filterOverall)
     })
   }
   render() {
-    console.log(this.state.filterStatus)
     return (
       <div>
-        <Dropdown placeholder='Species'  clearable selection options={species} onChange={this.handleChange}/>
-        <Dropdown placeholder='Filter' clearable selection options={options} />
+        <Dropdown placeholder='Species' clearable selection options={species} onChange={this.changeFilterSpecies}/>
+        <Dropdown placeholder='Filter' clearable selection options={options} onChange={this.changeFilterOverall}/>
 
         <Divider />
       </div>
@@ -43,7 +47,8 @@ class Filters extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
   return{
-    changefilterStatus: (status) => { dispatch({ type: 'CHANGE_FILTER_STATUS', status }) }
+    filterSpecies: (species) => { dispatch({ type: 'FILTER_SPECIES', species }) },
+    filterOverall: (overall) => { dispatch({ type: 'FILTER_OVERALL', overall }) }
   }
 }
 

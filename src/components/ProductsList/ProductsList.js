@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './ProductsList.scss';
 import ProductCard from './ProductCard/ProductCard';
 import { Card } from 'semantic-ui-react';
-import { Transition } from 'react-spring/renderprops';
+import { Trail } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
 import { filterProductList } from '../../selectors/filterData';
 
@@ -15,14 +15,13 @@ class ProductsList extends Component {
     return (
       <Card.Group stackable={true} itemsPerRow={4} doubling={true}>
     
-        <Transition
+        <Trail
           items={productsList} keys={item => item.id}
-          trail={200}
+          trail={500}
           from={{ opacity: 0 }}
-          enter={{ opacity: 1 }}
-          leave={{ opacity: 0 }}>
+          to={{ opacity: 1 }}>
               {item => props => <ProductCard transition={props} product={item} addToChartList={this.addToChartList}/>}
-        </Transition>
+        </Trail>
   
       </Card.Group>
     )
