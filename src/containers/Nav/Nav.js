@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import './Nav.scss';
-import { Menu, Input, Icon, Container, Dropdown, Button } from 'semantic-ui-react';
+import { Menu, Input, Icon, Container, Dropdown, Button, Transition } from 'semantic-ui-react';
 import ChartItem from '../../components/ChartItem/ChartItem';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { totalPriceChart } from '../../selectors/totalPriceChart';
 
 class Nav extends Component {
     state = {
-        activeItem: 'none', activeBurger: true
+        activeItem: 'none', activeBurger: true, clickEffect: true
     }
-    componentDidMount() {
+    componentDidMount() { 
         window.addEventListener('resize', () => {
             if(window.innerWidth > 768){
                 this.setState({ activeBurger: true})
@@ -18,16 +19,22 @@ class Nav extends Component {
             }
         })
     }
+    componentDidUpdate(prevProps){
+        if (prevProps.chartList !== this.props.chartList && prevProps.chartList.length <= this.props.chartList.length){
+        // if chart product.amount is changed and product.length is equal or increase do animation on chart btn
+            this.setState({ clickEffect: !this.state.clickEffect })
+        }
+    }
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
     onBurgerClick = () => this.setState({ activeBurger: !this.state.activeBurger })
     removeFromChartList = (id) => {
         this.props.removeFromChart(id);
     }
+    
     render() {
-    const { activeItem } = this.state;
-    const { chartList } = this.props;
+    const { activeItem, clickEffect } = this.state;
+    const { chartList, totalPrice } = this.props;
     let menuCollapsed = this.state.activeBurger ? '' : 'collapsed';
-    let total = 0;
         return (
             <Menu stackable borderless>
                 <Container>
@@ -50,17 +57,17 @@ class Nav extends Component {
                         Type
                         </Menu.Item>
 
+                            <Transition animation='pulse' duration={500} visible={clickEffect}>
                         <Dropdown item simple button className='icon' icon='shop' text={`(${chartList.length})`}>
                             <Dropdown.Menu>
                          
                                 {chartList.length ? chartList.map(item => {
-                                    total += item.price * item.amount;
                                     return(
                                         <Dropdown.Item key={item.id}><ChartItem product={item} removeFromChartList={this.removeFromChartList}/></Dropdown.Item>
                                     )
                                 }) : <Dropdown.Item>No items in chart</Dropdown.Item>}
 
-                                {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${total} </Dropdown.Item> : null}
+                                {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${totalPrice} </Dropdown.Item> : null}
 
                                 <Button animated fluid size='small' as={Link} to='/chart'>
                                     <Button.Content visible>View Chart</Button.Content>
@@ -71,6 +78,7 @@ class Nav extends Component {
 
                             </Dropdown.Menu>
                         </Dropdown>
+                            </Transition>
                     </Menu.Menu>
                 </Container>
             </Menu>
@@ -80,7 +88,8 @@ class Nav extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        chartList: state.chartList
+        chartList: state.chartList,
+        totalPrice: totalPriceChart(state)
     }
 }
 const mapDispatchToProps = (dispatch) => {

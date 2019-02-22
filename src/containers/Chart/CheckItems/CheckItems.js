@@ -4,23 +4,23 @@ import ChartItem from '../../../components/ChartItem/ChartItem';
 import { Divider, Button, Icon } from 'semantic-ui-react';
 
 const CheckItems = (props) => {
-    const { chartList } = props;
-    let total = 0;
+    const { chartList, totalPrice } = props;
+    const btnDisabled = chartList.length > 0 ? false : true;
     return (
         <div className="check-items">
             {chartList.length ? chartList.map(item => {
-                total += item.price * item.amount;
                 return(
-                    <ChartItem key={item.id} product={item}/>
+                    <ChartItem key={item.id} product={item} removeFromChartList={props.removeFromChartList}/>
                 )
-            }) : <p className="check-items__status">No items in chart</p>}
+            }) : <h4 className="check-items__status">No items in chart</h4>}
             <Divider />
-           <p className="check-items__total">Total to pay: <span>${total}</span></p>
-            
-            <Button icon labelPosition='right' primary disabled={false} onClick={() => {props.goStep2()}}>
-                Next
-                <Icon name='right arrow' />
-            </Button>
+            <h3 className="check-items__total">Total to Pay: <span>${totalPrice}</span></h3>
+            <div className="check-items__buttons">
+                <Button icon labelPosition='right' primary disabled={btnDisabled} onClick={() => {props.goStep2()}}>
+                    Next
+                    <Icon name='right arrow' />
+                </Button>
+            </div>
         </div>
     )
 }

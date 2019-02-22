@@ -4,33 +4,42 @@ import { Container, Divider, Step, Icon, Segment, Progress, Button } from 'seman
 import { connect } from 'react-redux';
 import CheckItems from './CheckItems/CheckItems';
 import Shipping from './Shipping/Shipping';
+import Billing from './Billing/Billing';
+import Confirm from './Confirm/Confirm';
+import { totalPriceChart } from '../../selectors/totalPriceChart';
 
 class Chart extends Component {
   state = {
-    active: 'step1', notdisabled: 'step1'
+    active: 'step1', notdisabled: 'step1', s1completed: false, s2completed: false, s3completed: false
   }
-  goStep1 = () => this.setState({ active: 'step1', notdisabled: 'step1' });
-  goStep2 = () => this.setState({ active: 'step2', notdisabled: 'step2' });
-  goStep3 = () => this.setState({ active: 'step3', notdisabled: 'step3' });
-  goStep4 = () => this.setState({ active: 'step4', notdisabled: 'step4' });
-      
-  
+  goStep1 = () => this.setState({ active: 'step1', notdisabled: 'step1', s1completed: false});
+  goStep2 = () => this.setState({ active: 'step2', notdisabled: 'step2', s1completed: true, s2completed: false });
+  goStep3 = () => this.setState({ active: 'step3', notdisabled: 'step3', s2completed: true, s3completed: false });
+  goStep4 = () => this.setState({ active: 'step4', notdisabled: 'step4', s3completed: true });
+
+  removeFromChartList = (id) => {
+    this.props.removeFromChart(id);
+  }
   render() {
-    const { active, notdisabled } = this.state;
-    const { chartList } = this.props;
+    const { active, notdisabled, s1completed, s2completed, s3completed } = this.state;
+    const { chartList, totalPrice } = this.props;
 
     let stepContent = () => {
       switch (active) {
         case 'step1':
-          return  <CheckItems chartList={chartList} goStep2={this.goStep2}/>
+          return  <CheckItems chartList={chartList} goStep2={this.goStep2} totalPrice={totalPrice} removeFromChartList={this.removeFromChartList}/>
         case 'step2':
-          return  <Shipping goStep1={this.goStep1} goStep3={this.goStep3}/>
+          return  <Shipping goStep1={this.goStep1} goStep3={this.goStep3} totalPrice={totalPrice}/>
+        case 'step3':
+          return  <Billing goStep2={this.goStep2} goStep4={this.goStep4}/>
+        case 'step4':
+          return  <Confirm goStep3={this.goStep3}/>
       }
     }
     return (
       <Container>
         <Step.Group stackable='tablet' attached='top'>
-        <Step active={active === 'step1'} disabled={notdisabled !== 'step1'}>
+        <Step active={active === 'step1'} disabled={notdisabled !== 'step1'} completed={false} completed={s1completed}>
           <Icon name='shop' />
           <Step.Content>
             <Step.Title>Your Chart</Step.Title>
@@ -38,7 +47,7 @@ class Chart extends Component {
           </Step.Content>
         </Step>
 
-        <Step active={active === 'step2'} disabled={notdisabled !== 'step2'}>
+        <Step active={active === 'step2'} disabled={notdisabled !== 'step2'} completed={s2completed}>
           <Icon name='truck' />
           <Step.Content>
             <Step.Title>Shipping</Step.Title>
@@ -46,7 +55,7 @@ class Chart extends Component {
           </Step.Content>
         </Step>
 
-        <Step active={active === 'step3'} disabled={notdisabled !== 'step3'}>
+        <Step active={active === 'step3'} disabled={notdisabled !== 'step3'} completed={s3completed}>
           <Icon name='payment' />
           <Step.Content>
             <Step.Title>Billing</Step.Title>
@@ -62,7 +71,7 @@ class Chart extends Component {
         </Step>
       </Step.Group>
       <Segment attached>
-        <Progress percent={25} />
+        <Progress percent={25*active.slice(4,5)} indicating/>
         {stepContent()}
        
       </Segment>
@@ -76,7 +85,14 @@ class Chart extends Component {
 const mapStateToProps = (state) => {
   return {
     chartList: state.chartList,
+    totalPrice: totalPriceChart(state)
   }
 }
 
-export default connect(mapStateToProps)(Chart);
+const mapDispatchToProps = (dispatch) => {
+  return{
+      removeFromChart: (id) => { dispatch({ type: 'REMOVE_FROM_CHART', id }) }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Chart);

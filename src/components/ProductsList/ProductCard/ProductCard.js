@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import './ProductCard.scss';
-import { Card, Icon, Image, Button, Modal, Dimmer, Loader, Segment} from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Modal, Dimmer, Loader, Segment, Transition} from 'semantic-ui-react';
 
 class ProductCard extends Component {
-    state = { imgLoading: true }
+    state = { imgLoading: true, clickEffect: true }
     addToCart = (e, id) => {
        this.props.addToChartList(id)
-       let btn = e.target
+       this.chartOnClickEffect()
+      /*  let btn = e.target
        btn.setAttribute("style","transition: all .5s ease; transform: scale(1.2); background-color: rgba(0,0,0,0.3)");
-       setTimeout(() => btn.removeAttribute("style"), 500);
+       setTimeout(() => btn.removeAttribute("style"), 500); */
     }
+    chartOnClickEffect = () => this.setState({ clickEffect: !this.state.clickEffect })
     render(){
         const { product } = this.props;
+        const { clickEffect } = this.state
         return (
             <Card style={this.props.transition} className="product-card">
                 
@@ -38,12 +41,14 @@ class ProductCard extends Component {
                 </Card.Content>
                 <Card.Content extra>
                     <Card.Header>${product.price}
+                            <Transition animation='bounce' duration={1000} visible={clickEffect}>
                         <Button animated='vertical' floated='right' onClick={(e) => {this.addToCart(e,product.id)}}>
                             <Button.Content hidden>Add</Button.Content>
                             <Button.Content visible>
                                 <Icon name='shop' />
                             </Button.Content>
                         </Button>
+                            </Transition>
                     </Card.Header>
                     <Card.Meta>stadium: {product.stadium}</Card.Meta>   
                 </Card.Content>

@@ -51,10 +51,13 @@
             overflow: unset;
         }
 
-        .menu.transition{
+        .menu.transition{ // dropdown container in dropdown chart btn
             .item{
                 min-width: 260px;
             }
+        }
+        .ui.button{ // dropdown chart btn
+            z-index: 2;
         }
     }
 }

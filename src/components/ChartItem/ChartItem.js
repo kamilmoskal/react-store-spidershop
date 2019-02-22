@@ -23,4 +23,4 @@ const ChartItem = (props) => {
     )
 }
 
-export default ChartItem
+export default ChartItem;

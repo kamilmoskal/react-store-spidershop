@@ -4,7 +4,7 @@ import ProductsList from '../../components/ProductsList/ProductsList';
 import Filters from '../../components/Filters/Filters';
 import { Container, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { filterProductList } from '../../selectors/filterData';
+import { filterProductList } from '../../selectors/filterProductList';
 import PaginationBar from '../../components/PaginationBar/PaginationBar';
 
 class Products extends Component {
