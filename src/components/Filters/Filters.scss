@@ -1,5 +1,19 @@
 .filters{
-    .ui.selection.dropdown{
-        margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &__left{
+        .ui.selection.dropdown{
+            margin-right: 10px;
+        }
+    }
+    &__right{
+        display: flex;
+        flex-wrap: wrap;
+        p {
+          padding:11px 16px;
+          margin-bottom: unset;
+        }
     }
 }

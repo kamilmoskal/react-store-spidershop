@@ -7,7 +7,7 @@ const getFilterOverall = state => state.filterOverall;
 export const filterProductList = createSelector(
   [getFilterSpecies, getFilterOverall, getProductList],
   (species, overall, productsList) => {
-    let sortedList;
+    let sortedList = null;
     switch (species) {
       case '':
         if(overall === 'Price-L'){

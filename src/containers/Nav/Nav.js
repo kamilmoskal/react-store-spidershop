@@ -31,9 +31,9 @@ class Nav extends Component {
         return (
             <Menu stackable borderless>
                 <Container>
-                    <Menu.Item header as={Link} to='/'>
+                    <Menu.Item header>
                         <Icon name='bars' size="large" className='burger' onClick={this.onBurgerClick}/>
-                        <span>I<Icon name='heart' />SPIDERS</span>
+                        <Link to='/'><span>I<Icon name='heart' />SPIDERS</span></Link>
                         <Icon name='bars' size="large" style={{color: 'transparent'}}/>
                     </Menu.Item>
 
@@ -60,7 +60,7 @@ class Nav extends Component {
                                     )
                                 }) : <Dropdown.Item>No items in chart</Dropdown.Item>}
 
-                                {chartList.length ? <Dropdown.Item active>Total: ${total} </Dropdown.Item> : null}
+                                {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${total} </Dropdown.Item> : null}
 
                                 <Button animated fluid size='small' as={Link} to='/chart'>
                                     <Button.Content visible>View Chart</Button.Content>

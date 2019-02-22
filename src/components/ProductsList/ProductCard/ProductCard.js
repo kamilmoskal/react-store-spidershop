@@ -4,6 +4,12 @@ import { Card, Icon, Image, Button, Modal, Dimmer, Loader, Segment} from 'semant
 
 class ProductCard extends Component {
     state = { imgLoading: true }
+    addToCart = (e, id) => {
+       this.props.addToChartList(id)
+       let btn = e.target
+       btn.setAttribute("style","transition: all .5s ease; transform: scale(1.2); background-color: rgba(0,0,0,0.3)");
+       setTimeout(() => btn.removeAttribute("style"), 500);
+    }
     render(){
         const { product } = this.props;
         return (
@@ -32,7 +38,7 @@ class ProductCard extends Component {
                 </Card.Content>
                 <Card.Content extra>
                     <Card.Header>${product.price}
-                        <Button animated='vertical' floated='right' onClick={() => {this.props.addToChartList(product.id)}}>
+                        <Button animated='vertical' floated='right' onClick={(e) => {this.addToCart(e,product.id)}}>
                             <Button.Content hidden>Add</Button.Content>
                             <Button.Content visible>
                                 <Icon name='shop' />

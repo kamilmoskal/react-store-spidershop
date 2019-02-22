@@ -11,6 +11,9 @@
         letter-spacing: 4px;
         justify-content: space-between;
         transition: all .5s ease-out;
+        a{
+            color: black;
+        }
 
         @media (min-width: 768px){
             font-size:26px; 

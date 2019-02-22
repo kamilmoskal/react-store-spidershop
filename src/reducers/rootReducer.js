@@ -18,9 +18,15 @@ const initState = {
         {id: 16, species: 'Grammostola', name: 'Rosea', stock: 21, price: 65, stadium: 'L2/L3', img: 'g_rosea', amount: 1},
     ],
     chartList: [
-        {id: 1, species: 'Brachypelma', name: 'Boehmei', stock: 87, price: 15, stadium: 'L1/L2', img: 'b_boehmei', amount: 1}
+        {id: 1, species: 'Brachypelma', name: 'Boehmei', stock: 57, price: 15, stadium: 'L1/L2', img: 'b_boehmei', amount: 1},
+        {id: 2, species: 'Brachypelma', name: 'Vagans', stock: 27, price: 5, stadium: 'L1/L3', img: 'b_vagans', amount: 1},
+        {id: 3, species: 'Brachypelma', name: 'Albopilosum', stock: 43, price: 8, stadium: 'L2/L4', img: 'b_albopilosum', amount: 1},
+        {id: 4, species: 'Brachypelma', name: 'Emilia', stock: 2, price: 40, stadium: 'L6', img: 'b_emilia', amount: 1},
     ],
-    filterSpecies: '', filterOverall: ''
+    filterSpecies: '', 
+    filterOverall: '', 
+    currentPage: 1, 
+    productsOnPage: 12,
 }
 const rootReducer = (state = initState, action) => {
     
@@ -52,6 +58,11 @@ const rootReducer = (state = initState, action) => {
         return { 
             ...state,
             filterOverall: action.overall
+        }
+    } else if (action.type === 'CHANGE_CURRENT_PAGE'){
+        return { 
+            ...state,
+            currentPage: action.numb
         }
     } else {
         return state
