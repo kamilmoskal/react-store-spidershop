@@ -6,8 +6,10 @@ const Billing = (props) => {
     return (
         <div className='billing'>
 
-            <p>payment in advance</p>
-            <p>asd</p>
+            <h2>Debit / Credit Card</h2>
+            <Divider />
+
+            <h2>Money Transfer</h2>
             <Divider />
             <div className="billing__buttons">
                 <Button icon labelPosition='left' primary disabled={false} onClick={() => {props.goStep2()}}>

@@ -3,7 +3,7 @@ import './ChartItem.scss';
 import { Image, Icon } from 'semantic-ui-react';
 
 const ChartItem = (props) => {
-    const { product } = props;
+    const { product, remove } = props;
     return (
         <div className="chart-item">
             <div className="chart-item__img">
@@ -16,9 +16,11 @@ const ChartItem = (props) => {
                     <p className="chart-item__price">${product.price * product.amount}</p>
                 </div>
             </div>
+            {remove == false ? null :
             <div className="chart-item__delete" onClick={() => {props.removeFromChartList(product.id)}}>
                 <Icon link name='close'/>
             </div>
+            }
         </div>
     )
 }

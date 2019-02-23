@@ -23,7 +23,6 @@ class Chart extends Component {
   render() {
     const { active, notdisabled, s1completed, s2completed, s3completed } = this.state;
     const { chartList, totalPrice } = this.props;
-
     let stepContent = () => {
       switch (active) {
         case 'step1':
@@ -33,51 +32,47 @@ class Chart extends Component {
         case 'step3':
           return  <Billing goStep2={this.goStep2} goStep4={this.goStep4}/>
         case 'step4':
-          return  <Confirm goStep3={this.goStep3}/>
+          return  <Confirm goStep3={this.goStep3} chartList={chartList} totalPrice={totalPrice}/>
       }
     }
     return (
       <Container>
         <Step.Group stackable='tablet' attached='top'>
-        <Step active={active === 'step1'} disabled={notdisabled !== 'step1'} completed={false} completed={s1completed}>
-          <Icon name='shop' />
-          <Step.Content>
-            <Step.Title>Your Chart</Step.Title>
-            <Step.Description>Check items</Step.Description>
-          </Step.Content>
-        </Step>
+          <Step active={active === 'step1'} disabled={notdisabled !== 'step1'} completed={false} completed={s1completed}>
+            <Icon name='shop' />
+            <Step.Content>
+              <Step.Title>Your Chart</Step.Title>
+              <Step.Description>Check items</Step.Description>
+            </Step.Content>
+          </Step>
 
-        <Step active={active === 'step2'} disabled={notdisabled !== 'step2'} completed={s2completed}>
-          <Icon name='truck' />
-          <Step.Content>
-            <Step.Title>Shipping</Step.Title>
-            <Step.Description>Choose your shipping options</Step.Description>
-          </Step.Content>
-        </Step>
+          <Step active={active === 'step2'} disabled={notdisabled !== 'step2'} completed={s2completed}>
+            <Icon name='truck' />
+            <Step.Content>
+              <Step.Title>Shipping</Step.Title>
+              <Step.Description>Choose your shipping options</Step.Description>
+            </Step.Content>
+          </Step>
 
-        <Step active={active === 'step3'} disabled={notdisabled !== 'step3'} completed={s3completed}>
-          <Icon name='payment' />
-          <Step.Content>
-            <Step.Title>Billing</Step.Title>
-            <Step.Description>Enter billing information</Step.Description>
-          </Step.Content>
-        </Step>
+          <Step active={active === 'step3'} disabled={notdisabled !== 'step3'} completed={s3completed}>
+            <Icon name='payment' />
+            <Step.Content>
+              <Step.Title>Payment</Step.Title>
+              <Step.Description>Choose payment method</Step.Description>
+            </Step.Content>
+          </Step>
 
-        <Step active={active === 'step4'} disabled={notdisabled !== 'step4'}>
-          <Icon name='info' />
-          <Step.Content>
-            <Step.Title>Confirm Order</Step.Title>
-          </Step.Content>
-        </Step>
-      </Step.Group>
-      <Segment attached>
-        <Progress percent={25*active.slice(4,5)} indicating/>
-        {stepContent()}
-       
-      </Segment>
-
-
-        
+          <Step active={active === 'step4'} disabled={notdisabled !== 'step4'}>
+            <Icon name='info' />
+            <Step.Content>
+              <Step.Title>Confirm Order</Step.Title>
+            </Step.Content>
+          </Step>
+        </Step.Group>
+        <Segment attached>
+          <Progress percent={25*active.slice(4,5)} indicating/>
+          {stepContent()}
+        </Segment>
       </Container>
     )
   }

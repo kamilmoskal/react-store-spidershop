@@ -3,8 +3,10 @@ import './Filters.scss';
 import { Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PaginationBar from '../PaginationBar/PaginationBar';
+import { optionsAllSpecies } from '../../selectors/optionsAllSpecies';
 
-const options_species = [
+//static data for filter dropdown
+/* const options_species = [
     { text: 'Acanthoscurria', value: 'Acanthoscurria' },
     { text: 'Avicularia', value: 'Avicularia' },
     { text: ` Brachypelma (${3})`, value: 'Brachypelma' },
@@ -13,7 +15,7 @@ const options_species = [
     { text: 'Pterinochilus', value: 'Pterinochilus' },
     { text: 'Poecilotheria', value: 'Poecilotheria' },
     { text: 'Grammostola', value: 'Grammostola' },
-]
+] */
 const options_overall = [
     { text: 'Price: from the lowest', value: 'Price-L' },
     { text: 'Price: from the highest', value: 'Price-H' },
@@ -22,8 +24,7 @@ const options_overall = [
 ]
 
 const Filters = (props) => {
-    const { productsList, currentPage, productsOnPage} = props;
-
+    const { productsList, currentPage, productsOnPage, options_species} = props;
     return (
       <div className="filters">
         <div className="filters__left">
@@ -38,7 +39,11 @@ const Filters = (props) => {
     )
   
 }
-
+const mapStateToProps = (state) => {
+  return {
+    options_species: optionsAllSpecies(state)
+  }
+}
 const mapDispatchToProps = (dispatch) => {
   return{
     filterSpecies: (species) => { dispatch({ type: 'FILTER_SPECIES', species }) },
@@ -46,4 +51,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(Filters);
+export default connect(mapStateToProps,mapDispatchToProps)(Filters);

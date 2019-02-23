@@ -90,39 +90,43 @@ class Shipping extends Component {
 
             <Form onSubmit={this.handleSubmit} error={submitError} success={submitSuccess}>
       
-                <h1>Delivery method</h1>
+                <h2>Delivery method</h2>
                 <Divider />
-
-                <h4>Payment in advance</h4>
-                <Form.Field>
-                    <Radio label='Delivery method A $24' name='radioGroup'
-                    value={24} checked={deliveryPrice === 24} onChange={this.handleChangeDelivery}/>
-                </Form.Field>
-                <Form.Field>
-                    <Radio label='Delivery method B $15' name='radioGroup'
-                    value={15} checked={deliveryPrice === 15} onChange={this.handleChangeDelivery}/>
-                </Form.Field>
-                <Form.Field>
-                    <Radio label='Delivery method C $21' name='radioGroup'
-                    value={21} checked={deliveryPrice === 21} onChange={this.handleChangeDelivery}/>
-                </Form.Field>
-            
-                <h4>Payment at delivery</h4>
-                <Form.Field>
-                    <Radio label='Delivery method D $14' name='radioGroup'
-                    value={14} checked={deliveryPrice === 14} onChange={this.handleChangeDelivery}/>
-                </Form.Field>
-                <Form.Field>
-                    <Radio label='Delivery method E $17' name='radioGroup'
-                    value={17} checked={deliveryPrice === 17} onChange={this.handleChangeDelivery}/>
-                </Form.Field>
-
+                <Form.Group widths='equal'>
+                    <Form.Field>
+                        <h4>Payment in advance</h4>
+                        <Form.Field>
+                            <Radio label='Delivery method A $24' name='radioGroup'
+                            value={24} checked={deliveryPrice === 24} onChange={this.handleChangeDelivery}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <Radio label='Delivery method B $15' name='radioGroup'
+                            value={15} checked={deliveryPrice === 15} onChange={this.handleChangeDelivery}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <Radio label='Delivery method C $21' name='radioGroup'
+                            value={21} checked={deliveryPrice === 21} onChange={this.handleChangeDelivery}/>
+                        </Form.Field>
+                    </Form.Field>
+                    <Form.Field>
+                        <h4>Payment at delivery</h4>
+                        <Form.Field>
+                            <Radio label='Delivery method D $14' name='radioGroup'
+                            value={14} checked={deliveryPrice === 14} onChange={this.handleChangeDelivery}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <Radio label='Delivery method E $17' name='radioGroup'
+                            value={17} checked={deliveryPrice === 17} onChange={this.handleChangeDelivery}/>
+                        </Form.Field>
+                    </Form.Field>
+                </Form.Group>
+                
                 <Form.Field>
                     <label>Message for seller</label>
                     <TextArea autoHeight placeholder='Leave message for seller' onChange={this.handleChangeMessage}/>
                 </Form.Field>
-
-                <h1>Consignee of the shipment</h1>
+               
+                <h2>Consignee of the shipment</h2>
                 <Divider />
 
                 <Form.Group widths='equal'>

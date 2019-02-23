@@ -39,7 +39,6 @@
         }
     }
     .right.menu{
-
         max-height: 200px;
         transition: all .5s ease-out;
         
@@ -57,7 +56,7 @@
             }
         }
         .ui.button{ // dropdown chart btn
-            z-index: 3;
+            //z-index: 3;
         }
     }
 }

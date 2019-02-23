@@ -27,13 +27,7 @@ class ProductsList extends Component {
           items={currentList} keys={item => Math.random()*10}
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}>
-              {item => props => {
-                console.log('sd')
-                return (
-                  <ProductCard transition={props} product={item} addToChartList={this.addToChartList}/>
-                )
-              }}
-            
+              {item => props => <ProductCard transition={props} product={item} addToChartList={this.addToChartList}/>}
         </Trail>
   
         {/* {currentList && currentList.map(item => {

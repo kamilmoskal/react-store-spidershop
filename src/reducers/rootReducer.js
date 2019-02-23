@@ -23,7 +23,7 @@ const initState = {
         {id: 3, species: 'Brachypelma', name: 'Albopilosum', stock: 43, price: 8, stadium: 'L2/L4', img: 'b_albopilosum', amount: 1},
         {id: 4, species: 'Brachypelma', name: 'Emilia', stock: 2, price: 40, stadium: 'L6', img: 'b_emilia', amount: 1},
     ],
-    filterSpecies: '', 
+    filterSpecies: '',
     filterOverall: '', 
     currentPage: 1, 
     productsOnPage: 12,
