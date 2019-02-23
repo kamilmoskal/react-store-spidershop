@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import PaginationBar from '../PaginationBar/PaginationBar';
 
 const options_species = [
-    { text: ` Brachypelma (${3})`, value: 'Brachypelma' },
     { text: 'Acanthoscurria', value: 'Acanthoscurria' },
     { text: 'Avicularia', value: 'Avicularia' },
+    { text: ` Brachypelma (${3})`, value: 'Brachypelma' },
     { text: 'Chromatopelma', value: 'Chromatopelma' },
     { text: 'Psalmopoeus', value: 'Psalmopoeus' },
     { text: 'Pterinochilus', value: 'Pterinochilus' },
