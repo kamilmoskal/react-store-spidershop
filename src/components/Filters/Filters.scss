@@ -1,19 +1,16 @@
-.filters{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 
-    &__left{
-        .ui.selection.dropdown{
-            margin-right: 10px;
-        }
-    }
-    &__right{
-        display: flex;
-        flex-wrap: wrap;
-        p {
-          padding:11px 16px;
-          margin-bottom: unset;
+.filters{
+
+    .ui.stackable.grid{
+
+        .column:last-child{
+            text-align: right;
+        
+            .ui.label{
+                background: white;
+                padding:14px;
+                font-size: 12px;
+            }
         }
     }
 }

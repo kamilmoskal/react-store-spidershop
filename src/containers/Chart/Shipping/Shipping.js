@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Shipping.scss';
 import { Divider, Button, Icon, Form, TextArea, Radio, Checkbox, Input, Dropdown, Select, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class Shipping extends Component {
     state = { 
@@ -77,13 +78,14 @@ class Shipping extends Component {
         }
 
         if (submitError) {
-            this.setState({ submitSuccess: false, arrayOfErrors, submitError })
+            this.setState({ submitSuccess: false, arrayOfErrors, submitError });
         } else {
-            this.setState({ submitSuccess: true, submitError })
+            this.setState({ submitSuccess: true, submitError });
+            this.props.saveBuyerData(this.state);
         }
     }
     render(){
-        const chartPrice = this.props.totalPrice;
+        const { chartPrice } = this.props;
         const { deliveryPrice, submitError, submitSuccess, arrayOfErrors } = this.state;
     return (
         <div className='shipping'>
@@ -96,27 +98,32 @@ class Shipping extends Component {
                     <Form.Field>
                         <h4>Payment in advance</h4>
                         <Form.Field>
-                            <Radio label='Delivery method A $24' name='radioGroup'
+                            <Radio label='Delivery method A' name='radioGroup'
                             value={24} checked={deliveryPrice === 24} onChange={this.handleChangeDelivery}/>
+                            &nbsp;$24
                         </Form.Field>
                         <Form.Field>
-                            <Radio label='Delivery method B $15' name='radioGroup'
+                            <Radio label='Delivery method B' name='radioGroup'
                             value={15} checked={deliveryPrice === 15} onChange={this.handleChangeDelivery}/>
+                            &nbsp;$15
                         </Form.Field>
                         <Form.Field>
-                            <Radio label='Delivery method C $21' name='radioGroup'
+                            <Radio label='Delivery method C' name='radioGroup'
                             value={21} checked={deliveryPrice === 21} onChange={this.handleChangeDelivery}/>
+                            &nbsp;$21
                         </Form.Field>
                     </Form.Field>
                     <Form.Field>
                         <h4>Payment at delivery</h4>
                         <Form.Field>
-                            <Radio label='Delivery method D $14' name='radioGroup'
+                            <Radio label='Delivery method D' name='radioGroup'
                             value={14} checked={deliveryPrice === 14} onChange={this.handleChangeDelivery}/>
+                            &nbsp;$14
                         </Form.Field>
                         <Form.Field>
-                            <Radio label='Delivery method E $17' name='radioGroup'
+                            <Radio label='Delivery method E' name='radioGroup'
                             value={17} checked={deliveryPrice === 17} onChange={this.handleChangeDelivery}/>
+                            &nbsp;$17
                         </Form.Field>
                     </Form.Field>
                 </Form.Group>
@@ -166,7 +173,7 @@ class Shipping extends Component {
                     Previous
                     <Icon name='left arrow' />
                 </Button>
-                <Button icon labelPosition='right' primary disabled={!submitSuccess} onClick={() => {this.props.goStep3()}}>
+                <Button icon labelPosition='right' primary disabled={submitSuccess} onClick={() => {this.props.goStep3()}}>
                     Next
                     <Icon name='right arrow' />
                 </Button>
@@ -175,5 +182,9 @@ class Shipping extends Component {
         )
     }
 }
-
-export default Shipping
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveBuyerData: (data) => dispatch({ type: 'SAVE_BUYER_DATA', data }) 
+    }
+}
+export default connect(null,mapDispatchToProps)(Shipping);

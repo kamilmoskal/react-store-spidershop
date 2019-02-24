@@ -15,6 +15,7 @@ class ProductCard extends Component {
     render(){
         const { product } = this.props;
         const { clickEffect } = this.state
+        console.log('cards');
         return (
             <Card style={this.props.transition} className="product-card">
                 

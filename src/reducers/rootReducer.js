@@ -23,6 +23,7 @@ const initState = {
         {id: 3, species: 'Brachypelma', name: 'Albopilosum', stock: 43, price: 8, stadium: 'L2/L4', img: 'b_albopilosum', amount: 1},
         {id: 4, species: 'Brachypelma', name: 'Emilia', stock: 2, price: 40, stadium: 'L6', img: 'b_emilia', amount: 1},
     ],
+    buyerData: { deliveryPrice: 20, deliveryMethod: 'Delivery method A', messageForSeller: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis, dolore.', name: 'Jan', lastname: 'Kowalski', adress: 'ul. Zalesie nr 20', zipcode: '44-440', city: 'Kraków', country: 'Poland', phone: '745634756', email: 'spiders@spiders.pl'},
     filterSpecies: '',
     filterOverall: '', 
     currentPage: 1, 
@@ -63,6 +64,13 @@ const rootReducer = (state = initState, action) => {
         return { 
             ...state,
             currentPage: action.numb
+        }
+    } else if (action.type === 'SAVE_BUYER_DATA'){
+        return { 
+            ...state,
+            buyerData: {
+                ...action.data
+            }
         }
     } else {
         return state

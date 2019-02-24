@@ -23,18 +23,19 @@ class ProductsList extends Component {
     let currentList = productsList.slice(offset, offset + productsOnPage);
     return (
       <Card.Group stackable={true} itemsPerRow={4} doubling={true}>
-        <Trail
+        {/* <Trail
+        native
           items={currentList} keys={item => Math.random()*10}
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}>
               {item => props => <ProductCard transition={props} product={item} addToChartList={this.addToChartList}/>}
-        </Trail>
-  
-        {/* {currentList && currentList.map(item => {
+        </Trail> */}
+
+        {currentList && currentList.map(item => {
           return (
                   <ProductCard key={item.id} product={item} addToChartList={this.addToChartList}/>
                 )
-        })} */}
+        })}
       </Card.Group>     
     )
   }

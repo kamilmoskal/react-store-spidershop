@@ -4,7 +4,7 @@ import ChartItem from '../../../components/ChartItem/ChartItem';
 import { Divider, Button, Icon } from 'semantic-ui-react';
 
 const CheckItems = (props) => {
-    const { chartList, totalPrice } = props;
+    const { chartList, chartPrice } = props;
     const btnDisabled = chartList.length > 0 ? false : true;
     return (
         <div className="check-items">
@@ -17,7 +17,7 @@ const CheckItems = (props) => {
                     <ChartItem key={item.id} product={item} removeFromChartList={props.removeFromChartList}/>
                 )
             }) : <h4 className="check-items__status">No items in chart</h4>}
-            <h3 className="check-items__total">Total to Pay: <span>${totalPrice}</span></h3>
+            <h3 className="check-items__total">Total to Pay: <span>${chartPrice}</span></h3>
             <Divider />
             <div className="check-items__buttons">
                 <Button icon labelPosition='right' primary disabled={btnDisabled} onClick={() => {props.goStep2()}}>

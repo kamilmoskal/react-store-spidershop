@@ -22,17 +22,17 @@ class Chart extends Component {
   }
   render() {
     const { active, notdisabled, s1completed, s2completed, s3completed } = this.state;
-    const { chartList, totalPrice } = this.props;
+    const { chartList, chartPrice, buyerData } = this.props;
     let stepContent = () => {
       switch (active) {
         case 'step1':
-          return  <CheckItems chartList={chartList} goStep2={this.goStep2} totalPrice={totalPrice} removeFromChartList={this.removeFromChartList}/>
+          return  <CheckItems chartList={chartList} goStep2={this.goStep2} chartPrice={chartPrice} removeFromChartList={this.removeFromChartList}/>
         case 'step2':
-          return  <Shipping goStep1={this.goStep1} goStep3={this.goStep3} totalPrice={totalPrice}/>
+          return  <Shipping goStep1={this.goStep1} goStep3={this.goStep3} chartPrice={chartPrice}/>
         case 'step3':
           return  <Billing goStep2={this.goStep2} goStep4={this.goStep4}/>
         case 'step4':
-          return  <Confirm goStep3={this.goStep3} chartList={chartList} totalPrice={totalPrice}/>
+          return  <Confirm goStep3={this.goStep3} chartList={chartList} chartPrice={chartPrice} buyerData={buyerData}/>
       }
     }
     return (
@@ -80,7 +80,8 @@ class Chart extends Component {
 const mapStateToProps = (state) => {
   return {
     chartList: state.chartList,
-    totalPrice: totalPriceChart(state)
+    chartPrice: totalPriceChart(state),
+    buyerData: state.buyerData
   }
 }
 

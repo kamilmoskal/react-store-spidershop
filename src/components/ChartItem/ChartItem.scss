@@ -42,4 +42,7 @@
           transform: translate(-50%,-50%);
         }
     }
+    &--confirm {
+        grid: 60px / 80px auto;
+    }
 }

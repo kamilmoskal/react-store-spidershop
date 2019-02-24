@@ -1,6 +1,6 @@
 import React from 'react';
 import './Filters.scss';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Grid, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PaginationBar from '../PaginationBar/PaginationBar';
 import { optionsAllSpecies } from '../../selectors/optionsAllSpecies';
@@ -27,14 +27,20 @@ const Filters = (props) => {
     const { productsList, currentPage, productsOnPage, options_species} = props;
     return (
       <div className="filters">
-        <div className="filters__left">
-          <Dropdown placeholder='Species' clearable selection options={options_species} onChange={(e, {value}) => {props.filterSpecies(value)}}/>
-          <Dropdown placeholder='Filter' clearable selection options={options_overall} onChange={(e, {value}) => {props.filterOverall(value)}}/>
-        </div>
-        <div className="filters__right">
-          <p>page {currentPage} of {Math.ceil(productsList.length / productsOnPage)} </p>
-          <PaginationBar productsList={productsList} productsOnPage={productsOnPage} currentPage={currentPage}/>
-        </div>
+        <Grid stackable >
+          <Grid.Column mobile={16} tablet={8} computer={3}>
+            <Dropdown placeholder='Species' fluid clearable selection options={options_species} onChange={(e, {value}) => {props.filterSpecies(value)}}/>
+          </Grid.Column>
+
+          <Grid.Column mobile={16} tablet={8} computer={3}>
+            <Dropdown placeholder='Filter' fluid clearable selection options={options_overall} onChange={(e, {value}) => {props.filterOverall(value)}}/>
+          </Grid.Column>
+
+          <Grid.Column mobile={16} tablet={16} computer={10}>
+            <Label>page {currentPage} of {Math.ceil(productsList.length / productsOnPage)} </Label>
+            <PaginationBar productsList={productsList} productsOnPage={productsOnPage} currentPage={currentPage}/>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   

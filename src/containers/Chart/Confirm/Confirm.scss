@@ -1,4 +1,19 @@
 .confirm {
+    .ui.vertical.segment {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    &__total{
+        text-align: right;
+        h4{
+            margin:5px 0;
+        }
+        span {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+    }
     &__buttons{
         display: flex;
         justify-content: space-between;
