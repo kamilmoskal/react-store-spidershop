@@ -2,6 +2,7 @@ import React from 'react';
 import './PaginationBar.scss';
 import { Pagination, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 const PaginationBar = (props) => {
     const { productsList, productsOnPage, currentPage } = props;
@@ -29,3 +30,8 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(null,mapDispatchToProps)(PaginationBar);
 
+PaginationBar.propTypes = {
+    productsList: PropTypes.array.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    productsOnPage: PropTypes.number.isRequired
+};

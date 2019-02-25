@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 class Shipping extends Component {
     state = { 
-            deliveryPrice: 0,
+            deliveryPrice: null,
             deliveryMethod: '',
             messageForSeller: '',
             name: '',
@@ -149,7 +149,7 @@ class Shipping extends Component {
                     <Form.Field required control={Select} options={[{ key: 'pl', value:'Poland', text: 'Poland' }]} label='Country' placeholder='Country' search searchInput={{ id: 'country' }} onChange={this.handleChangeCountry}/>
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    <Form.Field required control={Input} type='tel' label='Phone number' placeholder='Phone number' id="phone" onChange={this.handleChangeInput}/>
+                    <Form.Field required control={Input} type='number' label='Phone number' placeholder='Phone number' id="phone" onChange={this.handleChangeInput}/>
                     <Form.Field required control={Input} type='email' label='Email' placeholder='joe@schmoe.com' id="email" onChange={this.handleChangeInput}/>
                 </Form.Group>
                 <Form.Field required control={Checkbox} label='I agree to the Terms and Conditions' id='terms'/>
@@ -173,7 +173,7 @@ class Shipping extends Component {
                     Previous
                     <Icon name='left arrow' />
                 </Button>
-                <Button icon labelPosition='right' primary disabled={submitSuccess} onClick={() => {this.props.goStep3()}}>
+                <Button icon labelPosition='right' primary disabled={!submitSuccess} onClick={() => {this.props.goStep3()}}>
                     Next
                     <Icon name='right arrow' />
                 </Button>

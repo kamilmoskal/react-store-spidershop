@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ProductCard.scss';
 import { Card, Icon, Image, Button, Modal, Dimmer, Loader, Segment, Transition} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
     state = { imgLoading: true, clickEffect: true }
@@ -15,7 +16,6 @@ class ProductCard extends Component {
     render(){
         const { product } = this.props;
         const { clickEffect } = this.state
-        console.log('cards');
         return (
             <Card style={this.props.transition} className="product-card">
                 
@@ -60,3 +60,17 @@ class ProductCard extends Component {
 }
 
 export default ProductCard;
+
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        species: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        stock: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        stadium: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        amount: PropTypes.number.isRequired,
+    }).isRequired
+};
+  

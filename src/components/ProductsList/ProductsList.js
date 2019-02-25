@@ -4,6 +4,7 @@ import ProductCard from './ProductCard/ProductCard';
 import { Card } from 'semantic-ui-react';
 import { Trail } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class ProductsList extends Component {
   
@@ -49,4 +50,18 @@ const mapDispatchToProps = (dispatch) => {
 }
 export default connect(null,mapDispatchToProps)(ProductsList);
 
+ProductsList.propTypes = {
+  productsList: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      species: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      stock: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      stadium: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+    })).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  productsOnPage: PropTypes.number.isRequired
+};
  

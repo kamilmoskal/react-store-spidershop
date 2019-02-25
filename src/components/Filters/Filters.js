@@ -4,6 +4,7 @@ import { Dropdown, Grid, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import PaginationBar from '../PaginationBar/PaginationBar';
 import { optionsAllSpecies } from '../../selectors/optionsAllSpecies';
+import PropTypes from 'prop-types';
 
 //static data for filter dropdown
 /* const options_species = [
@@ -29,7 +30,7 @@ const Filters = (props) => {
       <div className="filters">
         <Grid stackable >
           <Grid.Column mobile={16} tablet={8} computer={3}>
-            <Dropdown placeholder='Species' fluid clearable selection options={options_species} onChange={(e, {value}) => {props.filterSpecies(value)}}/>
+            <Dropdown placeholder='Species' search fluid clearable selection options={options_species} onChange={(e, {value}) => {props.filterSpecies(value)}}/>
           </Grid.Column>
 
           <Grid.Column mobile={16} tablet={8} computer={3}>
@@ -58,3 +59,13 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Filters);
+
+Filters.propTypes = {
+  productsList: PropTypes.array.isRequired,
+  options_species: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  productsOnPage: PropTypes.number.isRequired
+};

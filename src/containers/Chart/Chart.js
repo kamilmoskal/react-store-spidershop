@@ -7,6 +7,7 @@ import Shipping from './Shipping/Shipping';
 import Billing from './Billing/Billing';
 import Confirm from './Confirm/Confirm';
 import { totalPriceChart } from '../../selectors/totalPriceChart';
+import PropTypes from 'prop-types';
 
 class Chart extends Component {
   state = {
@@ -92,3 +93,30 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Chart);
+
+Chart.propTypes = {
+  chartList: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      species: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      stock: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      stadium: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+    })).isRequired,
+  chartPrice: PropTypes.number.isRequired,
+  buyerData: PropTypes.shape({
+    deliveryPrice: PropTypes.number.isRequired,
+    deliveryMethod: PropTypes.string.isRequired,
+    messageForSeller: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    adress: PropTypes.string.isRequired,
+    zipcode: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired
+};

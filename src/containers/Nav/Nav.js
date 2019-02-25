@@ -5,6 +5,7 @@ import ChartItem from '../../components/ChartItem/ChartItem';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { totalPriceChart } from '../../selectors/totalPriceChart';
+import PropTypes from 'prop-types';
 
 class Nav extends Component {
     state = {
@@ -33,7 +34,7 @@ class Nav extends Component {
     
     render() {
     const { activeItem, clickEffect } = this.state;
-    const { chartList, totalPrice } = this.props;
+    const { chartList, chartPrice } = this.props;
     let menuCollapsed = this.state.activeBurger ? '' : 'collapsed';
         return (
             <Menu stackable borderless>
@@ -67,7 +68,7 @@ class Nav extends Component {
                                     )
                                 }) : <Dropdown.Item>No items in chart</Dropdown.Item>}
 
-                                {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${totalPrice} </Dropdown.Item> : null}
+                                {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${chartPrice} </Dropdown.Item> : null}
 
                                 <Button animated fluid size='small' as={Link} to='/chart'>
                                     <Button.Content visible>View Chart</Button.Content>
@@ -89,7 +90,7 @@ class Nav extends Component {
 const mapStateToProps = (state) => {
     return{
         chartList: state.chartList,
-        totalPrice: totalPriceChart(state)
+        chartPrice: totalPriceChart(state)
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -98,3 +99,17 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Nav);
+
+Nav.propTypes = {
+    chartList: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        species: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        stock: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        stadium: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        amount: PropTypes.number.isRequired,
+      })).isRequired,
+    chartPrice: PropTypes.number.isRequired,
+};
