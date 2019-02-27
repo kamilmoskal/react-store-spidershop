@@ -12,11 +12,15 @@ class Nav extends Component {
         activeItem: 'none', activeBurger: true, clickEffect: true
     }
     componentDidMount() { 
+        let currentWidth = window.innerWidth;
         window.addEventListener('resize', () => {
             if(window.innerWidth > 768){
                 this.setState({ activeBurger: true})
             } else {
-                this.setState({ activeBurger: false})
+                //to properly scroll chartList in nav on mobile without closing menu when adress bar is hiding (coz of scrolling down)
+                if (window.innerWidth !== currentWidth){ 
+                    this.setState({ activeBurger: false})
+                }
             }
         })
     }
@@ -24,6 +28,11 @@ class Nav extends Component {
         if (prevProps.chartList !== this.props.chartList && prevProps.chartList.length <= this.props.chartList.length){
         // if chart product.amount is changed and product.length is equal or increase do animation on chart btn
             this.setState({ clickEffect: !this.state.clickEffect })
+        }
+        if (this.props.routeChanged !== prevProps.routeChanged) { // on route change, hide menu (mobile)
+            if(window.innerWidth < 768){
+                this.setState({ activeBurger: false})
+            }
         }
     }
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -70,7 +79,7 @@ class Nav extends Component {
 
                                 {chartList.length ? <Dropdown.Item active style={{textAlign: "right"}}>Total: ${chartPrice} </Dropdown.Item> : null}
 
-                                <Button animated fluid size='small' as={Link} to='/chart'>
+                                <Button animated fluid size='large' as={Link} to='/chart'>
                                     <Button.Content visible>View Chart</Button.Content>
                                     <Button.Content hidden>
                                         <Icon name='arrow right' />
@@ -101,15 +110,6 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps,mapDispatchToProps)(Nav);
 
 Nav.propTypes = {
-    chartList: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        species: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        stock: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        stadium: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        amount: PropTypes.number.isRequired,
-      })).isRequired,
-    chartPrice: PropTypes.number.isRequired,
+    chartList: PropTypes.array.isRequired,
+    chartPrice: PropTypes.number.isRequired
 };

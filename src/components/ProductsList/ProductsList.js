@@ -51,16 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(null,mapDispatchToProps)(ProductsList);
 
 ProductsList.propTypes = {
-  productsList: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      species: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      stock: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      stadium: PropTypes.string.isRequired,
-      img: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
-    })).isRequired,
+  productsList: PropTypes.array.isRequired,
   currentPage: PropTypes.number.isRequired,
   productsOnPage: PropTypes.number.isRequired
 };

@@ -41,16 +41,17 @@
     .right.menu{
         max-height: 200px;
         transition: all .5s ease-out;
-        
+
         &.collapsed{
             max-height: 0;
-            overflow: hidden;
+            overflow: auto;
         }
         @media (min-width: 768px){
             overflow: unset;
         }
 
         .menu.transition{ // dropdown container in dropdown chart btn
+            
             .item{
                 min-width: 260px;
             }

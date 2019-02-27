@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChartItem.scss';
 import { Image, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const ChartItem = (props) => {
     const { product, confirm } = props; // confirm props define grid-columns and hide delete btn
@@ -26,3 +27,17 @@ const ChartItem = (props) => {
 }
 
 export default ChartItem;
+  
+ChartItem.propTypes = {
+    product: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        species: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        stock: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        stadium: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        amount: PropTypes.number.isRequired,
+    }).isRequired,
+    confirm: PropTypes.bool
+};
