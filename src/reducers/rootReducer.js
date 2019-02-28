@@ -28,6 +28,7 @@ const initState = {
     filterOverall: '',
     currentPage: 1, 
     productsOnPage: 12,
+    searchValue: '',
 }
 const rootReducer = (state = initState, action) => {
     
@@ -71,6 +72,11 @@ const rootReducer = (state = initState, action) => {
             buyerData: {
                 ...action.data
             }
+        }
+    } else if (action.type === 'CHANGE_SEARCH_VALUE'){
+        return { 
+            ...state,
+            searchValue: action.value
         }
     } else {
         return state

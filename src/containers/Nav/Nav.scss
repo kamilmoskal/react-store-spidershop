@@ -39,19 +39,20 @@
         }
     }
     .right.menu{
-        max-height: 200px;
+        max-height: 220px;
         transition: all .5s ease-out;
 
         &.collapsed{
             max-height: 0;
-            overflow: auto;
+            overflow: hidden;
+            
         }
         @media (min-width: 768px){
             overflow: unset;
         }
 
         .menu.transition{ // dropdown container in dropdown chart btn
-            
+            position: absolute;
             .item{
                 min-width: 260px;
             }

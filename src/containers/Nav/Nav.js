@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './Nav.scss';
-import { Menu, Input, Icon, Container, Dropdown, Button, Transition } from 'semantic-ui-react';
+import { Menu, Input, Search, Icon, Container, Dropdown, Button, Transition } from 'semantic-ui-react';
 import ChartItem from '../../components/ChartItem/ChartItem';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { totalPriceChart } from '../../selectors/totalPriceChart';
 import PropTypes from 'prop-types';
+import { searchResults } from '../../selectors/searchResults';
 
 class Nav extends Component {
     state = {
@@ -40,10 +41,16 @@ class Nav extends Component {
     removeFromChartList = (id) => {
         this.props.removeFromChart(id);
     }
-    
+    onSearchChange = (e) => {
+        this.props.changeSearchValue(e.target.value); 
+    }
+    handleResultSelect = (e, data) => {
+        // for route in future
+        console.log(data.result.id)
+    }
     render() {
     const { activeItem, clickEffect } = this.state;
-    const { chartList, chartPrice } = this.props;
+    const { chartList, chartPrice, searchResults } = this.props;
     let menuCollapsed = this.state.activeBurger ? '' : 'collapsed';
         return (
             <Menu stackable borderless>
@@ -56,7 +63,11 @@ class Nav extends Component {
 
                     <Menu.Menu position='right' className={menuCollapsed}>
                         <Menu.Item>
-                            <Input icon={{ name: 'search', link: true }} placeholder='Search...' />
+                        <Search
+                            onResultSelect={this.handleResultSelect}
+                            onSearchChange={this.onSearchChange}
+                            results={searchResults}
+                        />
                         </Menu.Item>
 
                         <Menu.Item name='spiders' active={activeItem === 'spiders'} onClick={this.handleItemClick}>
@@ -99,12 +110,14 @@ class Nav extends Component {
 const mapStateToProps = (state) => {
     return{
         chartList: state.chartList,
-        chartPrice: totalPriceChart(state)
+        chartPrice: totalPriceChart(state),
+        searchResults: searchResults(state)
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        removeFromChart: (id) => { dispatch({ type: 'REMOVE_FROM_CHART', id }) }
+        removeFromChart: (id) => { dispatch({ type: 'REMOVE_FROM_CHART', id }) },
+        changeSearchValue: (value) => { dispatch({ type: 'CHANGE_SEARCH_VALUE', value }) }
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Nav);
