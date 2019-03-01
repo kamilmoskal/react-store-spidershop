@@ -9,7 +9,7 @@ export const searchResults = createSelector(
 
     let searchResults = []
     //filter items from all products, depending on value
-    let filteredResults = productList.filter(product => product.species.toLowerCase().indexOf(searchValue) > -1 || product.name.toLowerCase().indexOf(searchValue) > -1)
+    let filteredResults = productList.filter(product => product.species.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 || product.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1)
     //transform to desire data format
     filteredResults.forEach(result => {
         searchResults.push({
