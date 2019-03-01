@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { totalPriceChart } from '../../selectors/totalPriceChart';
 import PropTypes from 'prop-types';
 import { searchResults } from '../../selectors/searchResults';
+import { withRouter } from 'react-router';
+
 
 class Nav extends Component {
     state = {
@@ -30,7 +32,7 @@ class Nav extends Component {
         // if chart product.amount is changed and product.length is equal or increase do animation on chart btn
             this.setState({ clickEffect: !this.state.clickEffect })
         }
-        if (this.props.routeChanged !== prevProps.routeChanged) { // on route change, hide menu (mobile)
+        if (this.props.location.pathname !== prevProps.location.pathname) { // on route change, hide menu (mobile)
             if(window.innerWidth < 768){
                 this.setState({ activeBurger: false})
             }
@@ -45,8 +47,7 @@ class Nav extends Component {
         this.props.changeSearchValue(e.target.value); 
     }
     handleResultSelect = (e, data) => {
-        // for route in future
-        console.log(data.result.id)
+        this.props.history.push('/product/'+ data.result.id);
     }
     render() {
     const { activeItem, clickEffect } = this.state;
@@ -120,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
         changeSearchValue: (value) => { dispatch({ type: 'CHANGE_SEARCH_VALUE', value }) }
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Nav);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Nav));
 
 Nav.propTypes = {
     chartList: PropTypes.array.isRequired,

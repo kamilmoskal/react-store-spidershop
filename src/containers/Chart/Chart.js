@@ -96,15 +96,15 @@ export default connect(mapStateToProps,mapDispatchToProps)(Chart);
 
 Chart.propTypes = {
   chartList: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      species: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      stock: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      stadium: PropTypes.string.isRequired,
-      img: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
-    })).isRequired,
+    id: PropTypes.number.isRequired,
+    species: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    stock: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    stadium: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+  })).isRequired,
   chartPrice: PropTypes.number.isRequired,
   buyerData: PropTypes.shape({
     deliveryPrice: PropTypes.number.isRequired,

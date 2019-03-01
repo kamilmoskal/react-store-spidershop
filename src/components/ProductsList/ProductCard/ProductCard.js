@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import './ProductCard.scss';
 import { Card, Icon, Image, Button, Modal, Dimmer, Loader, Segment, Transition} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ProductCard extends Component {
     state = { imgLoading: true, clickEffect: true }
     addToCart = (e, id) => {
        this.props.addToChartList(id)
        this.chartOnClickEffect()
-      /*  let btn = e.target
-       btn.setAttribute("style","transition: all .5s ease; transform: scale(1.2); background-color: rgba(0,0,0,0.3)");
-       setTimeout(() => btn.removeAttribute("style"), 500); */
     }
     chartOnClickEffect = () => this.setState({ clickEffect: !this.state.clickEffect })
     render(){
@@ -32,13 +30,13 @@ class ProductCard extends Component {
                 }>
                     <Image fluid={true} src={require(`../../../img/${product.img}.jpg`)}/>
                 </Modal>
-    
+                
                 <Card.Content>
-                    <Card.Header>{product.species} {product.name}</Card.Header>
+                    <Card.Header as={Link} to={`/product/` + product.id}>{product.species} {product.name}</Card.Header>
                     <Card.Meta>
                         <span className='date'>available amount: {product.stock}</span>
                     </Card.Meta>
-                    <Card.Description>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, reprehenderit!</Card.Description>
+                    <Card.Description as={Link} to={`/product/` + product.id}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, reprehenderit!</Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                     <Card.Header>${product.price}

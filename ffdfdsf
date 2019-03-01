@@ -1,0 +1,17 @@
+[33m010e022[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m added productDetails and carousel inside
+[33mbade358[m added search products in searchBar
+[33m26b453a[m little mobile fix
+[33m1edd86e[m added propTypes
+[33m262b593[m little upgrades/changes, disabled react-spring trail(coz rerender componnts to many times), added confirm step4
+[33mc8f8760[m added dynamic filter data in dropdown btn
+[33m99a405e[m step2 shipping with validation
+[33ma400e45[m added docs for githubpages
+[33mea69ba2[m added chart-animations
+[33m57daf27[m restucture app + started Chart component
+[33md0291a7[m added Pagination
+[33m492d87c[m add more filters
+[33m93c9735[m add selector and filterData
+[33m53bc117[m add/delete items in Chart
+[33mf4e7203[m set up redux
+[33md1fff03[m added ProductsList ProductCard
+[33m2d64314[m addded NavBar

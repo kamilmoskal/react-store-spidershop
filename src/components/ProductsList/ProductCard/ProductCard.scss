@@ -4,6 +4,14 @@
         margin:0;
         border:none;
     }
+    .content{
+        .header{
+          
+        }
+        &:hover .header, &:hover .description{
+            color: rgba(13, 113, 187,  0.6);
+        }
+    }
     .img-container{
         overflow: hidden;
 
